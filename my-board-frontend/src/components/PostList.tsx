@@ -21,7 +21,7 @@ function PostList() {
 
     return (
         <div>
-            <h2>게시글 목록</h2>
+            <h2 className="text-red-500 text-3xl font-bold underline">게시글 목록</h2>
             <ul>
                 {posts.map((post) => (
                     <li key={post.id}>
@@ -29,7 +29,7 @@ function PostList() {
                     </li>
                 ))}
             </ul>
-        </div>
+        </div> 
     );
 }
 
