@@ -8,7 +8,6 @@ import PostDetail from './components/PostDetail';
 function App() {
   return (
     <div>
-      <h1 className="text-red-500 text-3xl font-bold underline">Hello world!</h1>
       <Router>
         <Routes>
           <Route path="/" element={<PostList />} />

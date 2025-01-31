@@ -1,17 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { createPost, updatePost } from '../api/postApi';
 
-interface Post {
-    id?: number;
-    title: string;
-    content: string;
-    author: string;
-}
-
-interface PostFormProps {
-    existingPost?: Post;
-    onSubmit?: () => void;
-}
+import { Post, PostFormProps } from '../types/interfaces';
 
 function PostForm({ existingPost, onSubmit }: PostFormProps) {
     const [title, setTitle] = useState(existingPost?.title || '');
