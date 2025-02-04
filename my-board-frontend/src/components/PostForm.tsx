@@ -1,14 +1,13 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState } from 'react';
 import { createPost, updatePost } from '../api/postApi';
-
 import { Post, PostFormProps } from '../types/interfaces';
 
-function PostForm({ existingPost, onSubmit }: PostFormProps) {
+const PostForm: React.FC<PostFormProps> = ({ existingPost, onPostCreated }) => {
     const [title, setTitle] = useState(existingPost?.title || '');
     const [content, setContent] = useState(existingPost?.content || '');
     const [author, setAuthor] = useState(existingPost?.author || '');
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const postData: Omit<Post, 'id'> = { title, content, author };
         if (existingPost && existingPost.id !== undefined) {
@@ -18,41 +17,48 @@ function PostForm({ existingPost, onSubmit }: PostFormProps) {
             // 생성
             await createPost(postData);
         }
-        if (onSubmit) {
-            onSubmit();
+        if (onPostCreated) {
+            onPostCreated();
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>제목</label>
+        <form onSubmit={handleSubmit} className="mb-4">
+            <div className="mb-2">
+                <label className="block text-sm font-medium mb-1">제목</label>
                 <input
+                    className="border w-full p-2"
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    required
                 />
             </div>
-            <div>
-                <label>내용</label>
+            <div className="mb-2">
+                <label className="block text-sm font-medium mb-1">내용</label>
                 <textarea
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
+                    className="border w-full p-2"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    required
                 />
             </div>
-            <div>
-                <label>작성자</label>
+            <div className="mb-2">
+                <label className="block text-sm font-medium mb-1">작성자</label>
                 <input
-                  type="text"
-                  value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
+                    className="border w-full p-2"
+                    type="text"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                    required
                 />
             </div>
-            <button type="submit">
-              {existingPost ? '수정' : '등록'}
+            <button type="submit" className="bg-sky-500 text-white px-4 py-2 rounded-md">
+                등록록
+                {existingPost ? '수정' : '등록'}
             </button>
         </form>
     );
-}
+};
 
 export default PostForm;

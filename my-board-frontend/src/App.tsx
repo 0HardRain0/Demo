@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<PostList />} />
-          <Route path="/post/new" element={<PostForm onSubmit={() => {}} />} />
+          <Route path="/post/new" element={<PostForm onPostCreated={() => {}} />} />
           <Route path="/post/:id" element={<PostDetail postId={1} />} />
           {/* 필요 시 :id 파라미터 등을 이용한 상세/수정 페이지 라우팅 */}       
         </Routes>
