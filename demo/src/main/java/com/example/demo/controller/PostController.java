@@ -28,7 +28,7 @@ public class PostController {
 
     @PostMapping
     public BoardPost createPost(@RequestBody BoardPost boardPost) {
-        return postService.createPost(boardPost);
+        return postService.createPost(boardPost, null);
     }
 
     @PutMapping("/{id}")
@@ -39,5 +39,11 @@ public class PostController {
     @DeleteMapping("/{id}")
     public void deletePost(@PathVariable Long id) {
         postService.deletePost(id);
+    }
+
+    //답글
+    @PostMapping("/{parentId}/reply")
+    public BoardPost createReply(@PathVariable Long parentId, @RequestBody BoardPost boardPost) {
+        return postService.createPost(boardPost, parentId);
     }
 }
