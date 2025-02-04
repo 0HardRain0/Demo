@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getPostById, deletePost } from '../api/postApi';
-
-interface Post {
-    id: number;
-    title: string;
-    content: string;
-    author: string;
-}
-
-
-interface PostDetailProps {
-    postId: number;
-    onDelete?: () => void;
-}
+import { Post, PostDetailProps } from '../types/interfaces';
 
 function PostDetail({ postId, onDelete }: PostDetailProps) {
     const [post, setPost] = useState<Post | null>(null);
