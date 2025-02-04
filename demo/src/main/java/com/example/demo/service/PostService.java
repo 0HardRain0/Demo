@@ -22,16 +22,21 @@ public class PostService {
                 .orElseThrow(() -> new RuntimeException(id + "번 의 게시글을 찾을 수가 없습니다."));
     }
 
-    public BoardPost createPost(BoardPost boardPost) {
+    public BoardPost createPost(BoardPost boardPost, Long parentId) {
+        if (parentId != null) {
+            BoardPost parentPost = getPostById(parentId);
+            boardPost.setParent(parentPost);
+            parentPost.getReplies().add(boardPost);
+        }
         return postRepository.save(boardPost);
     }
 
     public BoardPost updatePost(Long id, BoardPost updatedPost) {
-        BoardPost boardPost = getPostById(id);
-        boardPost.setTitle(updatedPost.getTitle());
-        boardPost.setContent(updatedPost.getContent());
-        boardPost.setAuthor(updatedPost.getAuthor());
-        return postRepository.save(boardPost);
+        BoardPost existing = getPostById(id);
+        existing.setTitle(updatedPost.getTitle());
+        existing.setContent(updatedPost.getContent());
+        existing.setAuthor(updatedPost.getAuthor());
+        return postRepository.save(existing);
     }
 
     public void deletePost(Long id) {
