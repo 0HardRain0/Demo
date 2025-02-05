@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { createPost, updatePost } from '../api/postApi';
 import { Post, PostFormProps } from '../types/interfaces';
+import { useNavigate } from 'react-router-dom';
 
 const PostForm: React.FC<PostFormProps> = ({ existingPost, onPostCreated }) => {
     const [title, setTitle] = useState(existingPost?.title || '');
     const [content, setContent] = useState(existingPost?.content || '');
     const [author, setAuthor] = useState(existingPost?.author || '');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -53,8 +55,11 @@ const PostForm: React.FC<PostFormProps> = ({ existingPost, onPostCreated }) => {
                     required
                 />
             </div>
-            <button type="submit" className="bg-sky-500 text-white px-4 py-2 rounded-md">
-                등록록
+            <button 
+                type="submit" 
+                className="bg-sky-500 text-white px-4 py-2 rounded-md"
+                onClick={() => navigate('/')}
+            >
                 {existingPost ? '수정' : '등록'}
             </button>
         </form>

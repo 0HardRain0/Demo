@@ -47,7 +47,7 @@ const BulletinBoard: React.FC = () => {
                                 onClick={() => handleDeletePost(r.id)}
                                 className="text-sm text-red-500 hover:underline"
                             >
-                                삭제제
+                                삭제
                             </button>
                         </div>
                         <p className="text-gray-600 ml-4">{r.content}</p>

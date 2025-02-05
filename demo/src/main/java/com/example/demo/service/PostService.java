@@ -40,6 +40,9 @@ public class PostService {
     }
 
     public void deletePost(Long id) {
+        if(!postRepository.existsById(id)) {
+            throw new RuntimeException(id + "번 의 게시글을 찾을 수가 없습니다.");
+        }
         postRepository.deleteById(id);
     }
 }
