@@ -19,11 +19,6 @@ export interface PostFormProps {
     onPostCreated: () => void;
 }
 
-export interface PostDetailProps {
-    postId: number;
-    onDelete?: () => void;
-}
-
 export interface ReplyFormProps {
     parentId: number;
     onReplyCreated: () => void;
