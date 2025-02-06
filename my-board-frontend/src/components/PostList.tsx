@@ -31,7 +31,7 @@ const PostList: React.FC = () => {
             <h2 className="text-xl font-bold mb-4 text-sky-700">게시글 목록</h2>
             <button
               onClick={() => navigate('/post/new')}
-              className="px-3 py-1 bg-sky-600 text-white rounded-md"
+              className="px-3 py-1 bg-sky-600 text-white hover:bg-sky-700 rounded-md"
             >
               새 글 작성
             </button>
