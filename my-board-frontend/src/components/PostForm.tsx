@@ -25,44 +25,61 @@ const PostForm: React.FC<PostFormProps> = ({ existingPost, onPostCreated }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mb-4">
-            <div className="mb-2">
-                <label className="block text-sm font-medium mb-1">제목</label>
-                <input
-                    className="border w-full p-2"
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-            </div>
-            <div className="mb-2">
-                <label className="block text-sm font-medium mb-1">내용</label>
-                <textarea
-                    className="border w-full p-2"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    required
-                />
-            </div>
-            <div className="mb-2">
-                <label className="block text-sm font-medium mb-1">작성자</label>
-                <input
-                    className="border w-full p-2"
-                    type="text"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    required
-                />
-            </div>
-            <button 
-                type="submit" 
-                className="bg-sky-500 text-white px-4 py-2 rounded-md"
-                onClick={() => navigate('/')}
-            >
-                {existingPost ? '수정' : '등록'}
-            </button>
-        </form>
+        <div className="mb-4 p-4 border rounded bg-gray-50 shadow-md">
+            <h3 className="text-lg font-bold mb-3 text-sky-700">
+                {existingPost ? '게시글 수정' : '새 게시글 작성'}
+            </h3>
+            <form onSubmit={handleSubmit} className="space-y-3">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        제목
+                    </label>
+                    <input
+                        className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="제목을 입력하세요"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        내용
+                    </label>
+                    <textarea
+                        className="border border-gray-300 rounded w-full p-2 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-sky-200"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        placeholder="내용을 입력하세요"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        작성자
+                    </label>
+                    <input
+                        className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                        type="text"
+                        value={author}
+                        onChange={(e) => setAuthor(e.target.value)}
+                        placeholder="작성자 이름"
+                        required
+                    />
+                </div>
+
+                <div className="flex items-center gap-2 pt-2">
+                    <button
+                        type="submit"
+                        className="bg-sky-500 hover:bg-sky-600 text-white px-4 py-1 rounded font-medium"
+                        onClick={() => navigate('/')}
+                    >
+                        {existingPost ? '수정하기' : '등록하기'}
+                    </button>
+                </div>
+            </form>
+        </div>
     );
 };
 

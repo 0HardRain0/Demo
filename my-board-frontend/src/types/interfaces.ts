@@ -14,9 +14,10 @@ export interface PostRequest {
 }
 
 export interface PostFormProps {
-    existingPost?: Post;
+    existingPost?: Post | null;
     // onSubmit?: () => void;
     onPostCreated: () => void;
+    // onCancel: () => void;
 }
 
 export interface ReplyFormProps {

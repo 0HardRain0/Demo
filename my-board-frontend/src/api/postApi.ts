@@ -29,7 +29,7 @@ export const deletePost = async (id: number): Promise<void> => {
 };
 
 // 답글 생성
-export async function createReply(parentId: number, replyData: PostRequest): Promise<Post> {
+export const createReply = async (parentId: number, replyData: PostRequest): Promise<Post> => {
     const response = await axios.post<Post>(`${API_BASE_URL}/${parentId}/reply`, replyData);
     return response.data;
 }
