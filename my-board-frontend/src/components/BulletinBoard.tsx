@@ -86,7 +86,7 @@ const BulletinBoard: React.FC = () => {
                         </button>
                     </div>
 
-                    {showPostForm && <PostForm onPostCreated={handlePostCreated} />}
+                    {showPostForm && <PostForm onPostCreatedOrUpdate={handlePostCreated} />}
 
                     <ul className="space-y-4 mt-4">
                         {posts.map((post) => (

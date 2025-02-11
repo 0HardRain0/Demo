@@ -6,7 +6,7 @@ const API_BASE_URL = 'http://localhost:8080/api/posts';
 
 export const getPosts = async (): Promise<Post[]> => {
     const response = await axios.get<Post[]>(API_BASE_URL);
-    return response.data;
+    return response.data;      
 };
 
 export const getPostById = async (id: number): Promise<Post> => {
