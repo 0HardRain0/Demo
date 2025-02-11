@@ -16,7 +16,7 @@ export interface PostRequest {
 export interface PostFormProps {
     existingPost?: Post | null;
     // onSubmit?: () => void;
-    onPostCreated: () => void;
+    onPostCreatedOrUpdate: () => void;
     // onCancel: () => void;
 }
 

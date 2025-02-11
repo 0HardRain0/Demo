@@ -13,8 +13,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<PostList />} />
           {/* <Route path="/" element={<PostList />} /> */}
-          <Route path="/post/new" element={<PostForm onPostCreated={() => {}} />} />
-          <Route path="/post/:id" element={<PostDetail postId={1} />} />
+          <Route path="/post/new" element={<PostForm onPostCreatedOrUpdate={() => {}} />} />
+          <Route path="/post/:id" element={<PostDetail />} />
           {/* 필요 시 :id 파라미터 등을 이용한 상세/수정 페이지 라우팅 */}
           <Route path="/board" element={<BulletinBoard />} />
         </Routes>

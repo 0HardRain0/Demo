@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPost, updatePost } from '../api/postApi';
 import { Post, PostFormProps } from '../types/interfaces';
 import { useNavigate } from 'react-router-dom';
 
-const PostForm: React.FC<PostFormProps> = ({ existingPost, onPostCreated }) => {
+const PostForm: React.FC<PostFormProps> = ({ existingPost, onPostCreatedOrUpdate }) => {
     const [title, setTitle] = useState(existingPost?.title || '');
     const [content, setContent] = useState(existingPost?.content || '');
     const [author, setAuthor] = useState(existingPost?.author || '');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (existingPost) {
+            setTitle(existingPost.title);
+            setContent(existingPost.content);
+            setAuthor(existingPost.author);
+        }
+    }, [existingPost]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -19,8 +27,8 @@ const PostForm: React.FC<PostFormProps> = ({ existingPost, onPostCreated }) => {
             // 생성
             await createPost(postData);
         }
-        if (onPostCreated) {
-            onPostCreated();
+        if (onPostCreatedOrUpdate) {
+            onPostCreatedOrUpdate();
         }
     };
 

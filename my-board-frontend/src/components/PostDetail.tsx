@@ -42,6 +42,7 @@ const PostDetail: React.FC = () => {
             content: replyContent,
             author: replyAuthor
         });
+
         if (newReply) {
             setReplyTitle('');
             setReplyContent('');
@@ -64,7 +65,7 @@ const PostDetail: React.FC = () => {
                         <p>Loading or Not Found...</p>
                         <button 
                           onClick={handleGoBack} 
-                          className="px-3 py-1 bg-gray-600 rounded"
+                          className="px-3 py-1 bg-gray-600 text-white rounded mt-4"
                         >
                             목록으로
                         </button>
@@ -76,53 +77,74 @@ const PostDetail: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-sky-100 flex flex-col">
-          <div className="bg-sky-600 text-white p-4">My Board</div>
+            {/* 상단 헤더 */}
+          <div className="bg-sky-600 text-white p-4">
+            My Board
+          </div>
           <div className="flex-1 flex justify-center items-start p-4">
             <div className="bg-white w-full max-w-lg p-6 rounded shadow">
-              <h2 className="text-xl font-bold">{post.title}</h2>
-              <p className="text-gray-600 mb-2">{post.content}</p>
-              <p className="text-sm text-gray-400">by {post.author}</p>
-              <button 
-                onClick={handleGoBack} 
-                className="px-3 py-1 bg-gray-300 rounded mr-2 hover:bg-gray-400"
-              >
-                목록으로
-              </button>
-              <button
-                onClick={toggleReplyForm}
-                className="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded mr-2"
-              >
-                답글 달기
-              </button>
-              <button 
-                onClick={handleDelete} 
-                className="px-3 py-1 bg-red-400 hover:bg-red-600 text-white rounded mr-2"
-              >
-                삭제
-              </button>
+                {/* 게시글 헤더 */}
+              <div>
+                <h2 className="text-xl font-bold">{post.title}</h2>
+                <p className="text-sm text-gray-400">by {post.author}</p>
+                
+              </div>
+              
+                {/* 게시글 내용 */}
+              <div className="text-gray-700 mb-6">
+                <p className="text-gray-600 mb-2">{post.content}</p>
+              </div>
+              
+                {/* 게시글 버튼 */}
+              <div>
+                <div className="space-x-2 mb-4">
+                  <button 
+                    onClick={handleGoBack} 
+                    className="px-3 py-1 bg-gray-300 rounded mr-2 hover:bg-gray-400"
+                  >
+                    목록으로
+                  </button>
+                  <button
+                    onClick={toggleReplyForm}
+                    className="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded mr-2"
+                  >
+                    답글 달기
+                  </button>
+                  <button 
+                    onClick={handleDelete} 
+                    className="px-3 py-1 bg-red-400 hover:bg-red-600 text-white rounded mr-2"
+                  >
+                    삭제
+                  </button>
+                </div>
+              </div>
             </div>
+
+            {/* 답글 목록 */}
             {post.replies && post.replies.length > 0 && (
-                <div className="mt-6">
-                    <h3 className="text-lg font-bold mb-2">답글</h3>
-                    <ul className="space-y-2">
+                <div className="border-t pt-4">
+                    <h3 className="text-lg font-semibold mb-2 text-sky-700">답글</h3>
+                    <ul className="space-y-3">
                         {post.replies.map((r) => (
-                            <li key={r.id} className="border p-2 rounded">
-                                <h4 className="text-sm font-semibold">{r.title}</h4>
+                            <li key={r.id} className="border p-2 rounded bg-gray-50">
+                                <h4 className="text-sm font-bold text-gray-700">{r.title}</h4>
                                 <p className="text-sm text-gray-600">{r.content}</p>
-                                <span className="text-xs text-gray-400">by {r.author}</span>
+                                <span className="mt-1 text-xs text-gray-400">by {r.author}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
             )}
+
+            {/* 답글 폼 */}
             {replyForm && (
-                <div className="mt-4 p-3 border rounded bg-gray-50">
-                    <form onSubmit={handleSubmitReply}>
-                        <h4 className="text-sm font-bold mb-2">답글 작성</h4>
+                <div className="mt-6 p-4 border rounded bg-gray-50">
+                    <form onSubmit={handleSubmitReply} className="space-y-3">
+                        <h4 className="text-sm font-bold mb-2 text-sky-700">답글 작성</h4>
                         <div className="mb-2">
-                            <label className="block text-sm font-medium mb-1">제목</label>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">제목</label>
                             <input
-                                className="border w-full p-1 text-sm"
+                                className="border border-gray-300 rounded w-full p-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-200"
                                 type="text"
                                 value={replyTitle}
                                 onChange={(e) => setReplyTitle(e.target.value)}
@@ -130,9 +152,9 @@ const PostDetail: React.FC = () => {
                             />
                         </div>
                         <div className="mb-2">
-                            <label className="block text-xs font-medium mb-1">내용</label>
+                            <label className="block text-xs font-medium text-gray-700 mb-1">내용</label>
                             <textarea
-                                className="block text-xs font-medium mb-1"
+                                className="border border-gray-300 rounded w-full p-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-sky-200"
                                 value={replyContent}
                                 onChange={(e) => setReplyContent(e.target.value)}
                                 required
@@ -141,7 +163,7 @@ const PostDetail: React.FC = () => {
                         <div className="mb-2">
                             <label className="block text-xs font-medium mb-1">작성자</label>
                             <input
-                                className="block w-full p-1 text-sm"
+                                className="border border-gray-300 rounded w-full p-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-200"
                                 value={replyAuthor}
                                 onChange={(e) => setReplyAuthor(e.target.value)}
                                 required
@@ -149,7 +171,7 @@ const PostDetail: React.FC = () => {
                         </div>
                         <button
                             type="submit"
-                            className="px-3 py-1 bg-blue-500 hover:bg-blue-700 text-white rounded text-sm"
+                            className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-1 rounded text-sm"
                         >
                             등록
                         </button>
